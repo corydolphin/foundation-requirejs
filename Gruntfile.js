@@ -7,9 +7,6 @@ module.exports = function(grunt) {
         includePaths: ['bower_components/foundation/scss']
       },
       dist: {
-        options: {
-          outputStyle: 'compressed'
-        },
         files: {
           'css/app.css': 'scss/app.scss'
         }        
@@ -23,9 +20,28 @@ module.exports = function(grunt) {
         files: 'scss/**/*.scss',
         tasks: ['sass']
       }
+    },
+    requirejs: {
+        options: {
+          baseUrl: "./js",
+          mainConfigFile: "js/build.js",
+          out: ".build/optimized.js",
+        },
+        dev: {
+          options:{
+            optimize:"none"
+          }
+        },
+        production:{
+          options:{
+            optimize:"uglify2"            
+          }
+        }
     }
+
   });
 
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
