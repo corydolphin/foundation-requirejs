@@ -3,13 +3,16 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     jsTempDir: ".tmp/js",
     buildDir : ".build",
+    srcDir : "src/",
+    styleSrcDir: "<%= srcDir %>/styles",
+    scriptsSrcDir: "<%= srcDir %>/scripts",
     sass: {
       options: {
         includePaths: ['bower_components/foundation/scss']
       },
       dist: {
         files: {
-          '<%= buildDir %>/css/app.css': 'scss/app.scss'
+          '<%= buildDir %>/css/app.css': '<%= styleSrcDir %>/app.scss'
         }        
       }
     },
@@ -17,8 +20,8 @@ module.exports = function(grunt) {
     watch: {
       grunt: { files: ['Gruntfile.js'] },
       sass: {
-        files: 'scss/**/*.scss',
-        tasks: ['sass']
+        files: '<%= srcDir %>',
+        tasks: ['build']
       }
     },
     requirejs: {
@@ -34,7 +37,7 @@ module.exports = function(grunt) {
         },
         production:{
           options:{
-            optimize:"closure"            
+            optimize:"uglify2"            
           }
         }
     },
@@ -45,7 +48,7 @@ module.exports = function(grunt) {
         },
         expand: true,
         flatten: true,
-        cwd: 'cs',
+        cwd: '<%= scriptsSrcDir %>',
         src: ['*.coffee'],
         dest: '<%= jsTempDir %>',
         ext: '.js'
