@@ -1,6 +1,6 @@
 require.config
   name: "../../bower_components/almond/almond"
-  include: ["app"]
+  include: ["app"] # main entry point for your application.
   paths:
     jquery: "../../bower_components/jquery/jquery"
     modernizr: "../../bower_components/modernizr/"

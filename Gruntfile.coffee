@@ -6,6 +6,7 @@ module.exports = (grunt) ->
     srcDir: "src/"
     styleSrcDir: "<%= srcDir %>/styles"
     scriptsSrcDir: "<%= srcDir %>/scripts"
+    configDir : "boilerflask/config"
 
 # Compile our sass using compass.
     sass:
@@ -77,11 +78,12 @@ module.exports = (grunt) ->
 # Writes the transformation of assets from unversioned to versioned form, i.e.
 # app.min.css -> app.min.550d9252.css. Useful for dynamic templating
     filerev_assets:
-      options:
-        dest: 'config/assets.json'
-        cwd: '.build/'
-        prefix: 'static/'
-        prettyPrint:true
+      assets:
+        options:
+          dest: 'assets.json'
+          cwd: '.build/'
+          prefix: 'static/'
+          prettyPrint:true
 
     s3:
       options:
@@ -112,10 +114,20 @@ module.exports = (grunt) ->
       grunt:
         files: ["Gruntfile.js"]
 
-      sass:
+      src:
         files: "<%= srcDir %>"
         tasks: ["build"]
 
+    bgShell:
+        _defaults:
+          bg: true
+
+        watch:
+          cmd: "grunt watch"
+
+        runPython:
+          cmd: "python manage.py server"
+          bg: false
 
 
   grunt.loadNpmTasks 'grunt-filerev-assets' 
