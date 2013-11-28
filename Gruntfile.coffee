@@ -41,10 +41,12 @@ module.exports = (grunt) ->
         options:
           optimize: "none"
 
+# Uglify and minify the results
     uglify:
       options:
-        mangle: true
-        banner: "/*! <%= pkg.title || pkg.name %> - v<%= pkg.version + \"\\n\" %>" + "* <%= grunt.template.today(\"yyyy-mm-dd\") + \"\\n\" %>" + "* <%= pkg.homepage + \"\\n\" %>" + "* Copyright (c) <%= grunt.template.today(\"yyyy\") %> - <%= pkg.title %> */ <%= \"\\n\" %>"
+        compress:true
+        report:"min"
+        preserveComments:"some"
 
       js:
         src: "<%=buildDir %>/js/app.js"
@@ -145,5 +147,9 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build", ["sass", "coffee", "requirejs:dev"]
   grunt.registerTask "rev", ["filerev", "filerev_assets"]
-  grunt.registerTask "production", ["clean","build", "uglify", "cssmin", "rev", "s3:assets"]
+  grunt.registerTask "production-dry", ["clean","build", "uglify", "cssmin", "rev"]
+  grunt.registerTask "production", ["production-dry", "s3:assets"]  
   grunt.registerTask "default", ["build", "watch"]
+
+
+
