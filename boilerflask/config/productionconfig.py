@@ -10,8 +10,6 @@ from boilerflask.config.developmentconfig import DevelopmentConfig
 from boilerflask.config.baseconfig import BaseConfig
 
 def parseManifest(base):
-    r = lambda s: s.replace(".build/","")
-    rk = lambda s: s.replace(".build/static/","")
     replace_original = lambda s: s.replace("min.","")
     replace_result = lambda s : "%s/%s" % (base,s)
     loadManifest = lambda: json.loads(open("assets.json","r").read())

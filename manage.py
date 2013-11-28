@@ -17,7 +17,7 @@ def deploy():
 	call("grunt production")
 	call("git add ./assets.json -f") #force add since it is intentionally ignored in .gitignore
 	call("git commit -m \"Add assets.json for deploy\"")
-	call("git push foo_deploy_url@heroku deploy-throwaway:master -f")
+	call("git push git@heroku.com:boilerflask-test.git deploy-throwaway:master -f")
 	call("git checkout %s" % original_branch)
 	call("git branch -D deploy-throwaway")
 

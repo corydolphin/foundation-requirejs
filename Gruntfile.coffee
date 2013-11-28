@@ -82,7 +82,7 @@ module.exports = (grunt) ->
         options:
           dest: 'assets.json'
           cwd: '.build/'
-          prefix: 'static/'
+          prefix: ''
           prettyPrint:true
 
     s3:
@@ -90,7 +90,7 @@ module.exports = (grunt) ->
         key: ""
         secret: ""
         bucket: ""
-        access: "public-read"
+        access: ""
         gzip: true
         gzipExclude: [".png", ".woff", ".jpg"]
         maxOperations: 10
@@ -102,7 +102,7 @@ module.exports = (grunt) ->
 
       assets:
         upload: [
-            src: "<%= buildDir  %>/css/app.min.*.css"
+            src: "<%= buildDir %>/css/app.min.*.css"
             dest: "css/"
           ,
             src: "<%=buildDir %>/js/app.min.*.js"

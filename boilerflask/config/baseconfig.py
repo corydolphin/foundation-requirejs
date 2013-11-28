@@ -15,4 +15,4 @@ class BaseConfig(object):
     MONGODB_HOST  = 'localhost'
     MONGODB_PORT = 27017
     MONGODB_DB = 'demo'
-    S3_STATIC_URL = "//" #fix this 
+    S3_STATIC_URL = "//static.goodme.me" #fix this 
