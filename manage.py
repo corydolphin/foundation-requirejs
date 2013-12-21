@@ -7,6 +7,15 @@ manager = Manager(app)
 
 @manager.command
 def server():
+	extra_dirs = ['boilerflask/templates']
+	extra_files = extra_dirs[:]
+	for extra_dir in extra_dirs:
+	    for dirname, dirs, files in os.walk(extra_dir):
+	        for filename in files:
+	            filename = path.join(dirname, filename)
+	            if path.isfile(filename):
+	                extra_files.append(filename)
+
 	app.run(host='0.0.0.0', debug=app.config["DEBUG"], port=int(os.environ.get('PORT', 5000)))
 
 @manager.command
