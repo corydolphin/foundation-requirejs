@@ -32,6 +32,7 @@ pip-log.txt
 # Generated files
 *.[oa]
 *.py[co]
+*.pyc
 *.rbc
 
 #Temporary Files
